@@ -8,13 +8,13 @@
 
 ## Example
 
-Here is an example GitHub job using the `github-action-deploy` action.
+Here is an example GitHub job using the Cloud Maker `cloud-maker-ai/github-action-deploy` action.
 
 ```yml
 name: CM Deploy Pull Request Example
 on: pull_request
 jobs:
-  deploy-to-cloud-maker:
+  cloud-maker-deployment:
     runs-on: ubuntu-latest
     steps:
       - uses: cloud-maker-ai/github-action-deploy@v1
