@@ -2,8 +2,11 @@ name: Test Action
 
 on: pull_request
 
+env:
+  RESOURCE_GROUP_NAME: "Prod-RefArch-RGOnly-TD"
+
 jobs:
-  test:
+  test-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,3 +15,18 @@ jobs:
           CLOUD_MAKER_TOKEN: ${{secrets.CLOUD_MAKER_TOKEN}}
           CLOUD_MAKER_PIPELINE_ID: ${{secrets.CLOUD_MAKER_PIPELINE_ID}}
           CLOUD_MAKER_STAGE_ID: ${{secrets.CLOUD_MAKER_STAGE_ID}}
+
+  clean-up:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Azure/CLI@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            if $(az group exists --name ${{ env.RESOURCE_GROUP_NAME }}) ; then
+              echo "Deleting Azure resource group..."
+              az group delete --name ${{ env.RESOURCE_GROUP_NAME }} -y
+              echo "Azure resource group deleted"
+            else            
+              echo "Azure resource group doesn't exist, skipping deletion"
+            fi
