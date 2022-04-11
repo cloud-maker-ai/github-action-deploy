@@ -1,0 +1,14 @@
+name: Test Action
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          CLOUD_MAKER_TOKEN: ${{secrets.CLOUD_MAKER_TOKEN}}
+          CLOUD_MAKER_PIPELINE_ID: ${{secrets.CLOUD_MAKER_PIPELINE_ID}}
+          CLOUD_MAKER_STAGE_ID: ${{secrets.CLOUD_MAKER_STAGE_ID}}

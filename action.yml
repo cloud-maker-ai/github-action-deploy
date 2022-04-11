@@ -1,0 +1,18 @@
+name: "CM Deploy"
+description: "Deploy a Cloud Maker blueprint"
+author: "Cloud Maker"
+
+inputs:
+  CLOUD_MAKER_TOKEN:
+    description: "Cloud Maker API Token"
+    required: true
+  CLOUD_MAKER_PIPELINE_ID:
+    description: "Cloud Maker Pipeline ID to be deployed"
+    required: true
+  CLOUD_MAKER_STAGE_ID:
+    description: "Cloud Maker Stage ID to be deployed"
+    required: true
+
+runs:
+  using: "node16"
+  main: "dist/index.js"
