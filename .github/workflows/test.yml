@@ -17,6 +17,7 @@ jobs:
           CLOUD_MAKER_STAGE_ID: ${{secrets.CLOUD_MAKER_STAGE_ID}}
 
   clean-up:
+    needs: test-deploy
     runs-on: ubuntu-latest
     steps:
       - uses: Azure/CLI@v1
