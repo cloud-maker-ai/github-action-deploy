@@ -70,10 +70,12 @@ run().catch((error) => {
     const status = error.response?.status || "failed";
     const message =
       status === 404
-        ? "Cloud Maker Pipeline or Stage not found. Please ensure that all inputs are set correctly."
+        ? "Cloud Maker Pipeline or Stage not found."
         : error.response?.data?.message || error.message;
 
-    setFailed(`Deployment failed. (${status}) ${message}`);
+    setFailed(
+      `Deployment failed. (${status}) ${message}. Please ensure that all inputs are set correctly.`
+    );
   } else {
     setFailed(`${error.message}`);
   }
