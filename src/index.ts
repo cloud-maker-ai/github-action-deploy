@@ -57,7 +57,8 @@ async function run() {
     if (status === "Succeeded") {
       break;
     } else if (status === "Failed") {
-      throw new Error("Cloud Maker reported deployment failure");
+      setFailed("Deployment failed");
+      break;
     }
 
     await new Promise((r) => setTimeout(r, lastSeenLog > 0 ? 5000 : 500)); // sleep
@@ -72,9 +73,8 @@ run().catch((error) => {
         ? "Cloud Maker Pipeline or Stage not found. Please ensure that all inputs are set correctly."
         : error.response?.data?.message || error.message;
 
-    console.log(`Deployment failed. (${status}) ${message}`);
+    setFailed(`Deployment failed. (${status}) ${message}`);
   } else {
-    console.log(`ERROR: ${error.message}`);
+    setFailed(`ERROR: ${error.message}`);
   }
-  setFailed("Deployment failed");
 });
