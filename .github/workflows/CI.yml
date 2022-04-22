@@ -5,10 +5,9 @@ on:
   push:
     branches:
       - main
-      - feature/**
 
 env:
-  RESOURCE_GROUP_NAME: "Test-RefArch-RgOnly-G"
+  RESOURCE_GROUP_NAME: "Test-RefArch-RgOnly-PG"
 
 jobs:
   test-deploy:
