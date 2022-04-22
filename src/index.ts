@@ -1,12 +1,38 @@
+import { validate } from "uuid";
 import { getInput, setFailed } from "@actions/core";
 import axios from "axios";
 
 async function run() {
-  console.log("Retrieving variables");
+  console.log("Retrieving inputs");
 
   const cmApiToken = getInput("CLOUD_MAKER_TOKEN");
   const cmPipelineId = getInput("CLOUD_MAKER_PIPELINE_ID");
   const cmStageId = getInput("CLOUD_MAKER_STAGE_ID");
+
+  let inputsAreValid = true;
+  if (!cmApiToken) {
+    console.warn("Input 'CLOUD_MAKER_TOKEN' has not been set");
+    inputsAreValid = false;
+  }
+  if (!cmPipelineId) {
+    console.warn("Input 'CLOUD_MAKER_PIPELINE_ID' has not been set");
+    inputsAreValid = false;
+  }
+  if (!cmStageId) {
+    console.warn("Input 'CLOUD_MAKER_STAGE_ID' has not been set");
+    inputsAreValid = false;
+  }
+  if (cmPipelineId && !validate(cmPipelineId)) {
+    console.warn("Input 'CLOUD_MAKER_PIPELINE_ID' is not a valid UUID");
+    inputsAreValid = false;
+  }
+  if (cmStageId && !validate(cmStageId)) {
+    console.warn("Input 'CLOUD_MAKER_STAGE_ID' is not a valid UUID");
+    inputsAreValid = false;
+  }
+  if (!inputsAreValid) {
+    throw new Error("Missing or invalid inputs");
+  }
 
   const cmBaseAddress = "https://api.cloudmaker.ai/v1";
   const headers = {
@@ -52,9 +78,20 @@ async function run() {
   }
 }
 
-try {
-  run();
-} catch (error: any) {
-  console.log(`ERROR: ${error.message}`);
-  setFailed(error.message);
-}
+run().catch((error) => {
+  if (axios.isAxiosError(error)) {
+    const status = error.response?.status || "failed";
+    const message: string =
+      status === 404
+        ? "Cloud Maker Pipeline or Stage not found."
+        : error.response?.data?.message || error.message;
+
+    setFailed(
+      `Deployment failed. (${status}) ${message}${
+        message.endsWith(".") ? "" : "."
+      } Please ensure that all inputs are set correctly.`
+    );
+  } else {
+    setFailed(`${error.message}`);
+  }
+});
