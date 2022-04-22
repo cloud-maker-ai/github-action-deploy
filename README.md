@@ -1,4 +1,12 @@
-# Cloud Maker GitHub Action - Deploy
+<p align="center">
+  <img align="center" alt="Cloud Maker Logo" src="https://assets.website-files.com/5d9602ef4bbd97f74f44e884/5d97467689c88c48e1cc5133_logo_full.svg" />
+  <h3 align="center">GitHub Cloud Maker Deploy Action</h3>
+  <img align="center" alt="CI Status" src="https://github.com/cloud-maker-ai/github-action-deploy/actions/workflows/CI.yml/badge.svg" />
+</p>
+
+---
+
+A GitHub action for Cloud Maker deployments!
 
 ## Inputs
 

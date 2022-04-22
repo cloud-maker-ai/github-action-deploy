@@ -1,10 +1,26 @@
 {
-  "name": "cm-deploy",
+  "name": "cloud-maker-github-deploy-action",
   "version": "1.0.0",
   "description": "CM Deploy Github Action",
+  "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/index.ts -o dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloud-maker-ai/github-action-deploy.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "Cloud Maker"
+  ],
+  "author": "Cloud Maker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloud-maker-ai/github-action-deploy/issues"
+  },
+  "homepage": "https://cloudmaker.ai",
   "devDependencies": {
     "@actions/core": "^1.6.0",
     "@tsconfig/node16": "^1.0.2",
