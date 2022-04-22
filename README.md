@@ -1,7 +1,7 @@
 <p align="center">
   <img align="center" alt="Cloud Maker Logo" src="https://assets.website-files.com/5d9602ef4bbd97f74f44e884/5dd5fd2fcd567c61f26010e9_logo_full_white.svg" />
   <h3 align="center">GitHub Cloud Maker Deploy Action</h3>
-  <img align="center" alt="CI Status" src="https://github.com/cloud-maker-ai/github-action-deploy/actions/workflows/test.yml/badge.svg" />
+  <img align="center" alt="CI Status" src="https://github.com/cloud-maker-ai/github-action-deploy/actions/workflows/CI.yml/badge.svg" />
 </p>
 
 ---
