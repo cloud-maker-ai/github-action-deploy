@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.release.tag_name }}
+      - run: npm i
+      - run: npm run build
 
       - name: Setup Node
         uses: actions/setup-node@v2
