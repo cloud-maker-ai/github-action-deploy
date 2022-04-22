@@ -1,6 +1,10 @@
 name: Test Action
 
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 env:
   RESOURCE_GROUP_NAME: "Prod-RefArch-RGOnly-TD"
@@ -10,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: npm i
+      - run: npm run build
       - uses: ./
         with:
           CLOUD_MAKER_TOKEN: ${{secrets.CLOUD_MAKER_TOKEN}}
