@@ -1,5 +1,7 @@
 # Cloud Maker GitHub Action - Deploy
 
+![status](https://github.com/cloud-maker-ai/github-action-deploy/actions/workflows/test.yml/badge.svg)
+
 ## Inputs
 
 - `CLOUD_MAKER_TOKEN`: The Cloud Maker API token as configured in the Organisation Management screen.

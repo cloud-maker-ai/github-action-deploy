@@ -1,10 +1,11 @@
-name: Test Action
+name: Tests
 
 on:
   pull_request:
   push:
     branches:
       - main
+      - feature/**
 
 env:
   RESOURCE_GROUP_NAME: "Prod-RefArch-RGOnly-TD"
