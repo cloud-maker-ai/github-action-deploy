@@ -8,6 +8,19 @@ async function run() {
   const cmPipelineId = getInput("CLOUD_MAKER_PIPELINE_ID");
   const cmStageId = getInput("CLOUD_MAKER_STAGE_ID");
 
+  if (!cmApiToken) {
+    console.warn("Input 'CLOUD_MAKER_TOKEN' has not been set");
+  }
+  if (!cmPipelineId) {
+    console.warn("Input 'CLOUD_MAKER_PIPELINE_ID' has not been set");
+  }
+  if (!cmStageId) {
+    console.warn("Input 'CLOUD_MAKER_STAGE_ID' has not been set");
+  }
+  if (!cmApiToken || !cmPipelineId || !cmStageId) {
+    throw new Error("Missing inputs");
+  }
+
   const cmBaseAddress = "https://api.cloudmaker.ai/v1";
   const headers = {
     "X-Api-Key": cmApiToken,
@@ -44,8 +57,7 @@ async function run() {
     if (status === "Succeeded") {
       break;
     } else if (status === "Failed") {
-      setFailed("Deployment failed");
-      break;
+      throw new Error("Cloud Maker reported deployment failure");
     }
 
     await new Promise((r) => setTimeout(r, lastSeenLog > 0 ? 5000 : 500)); // sleep

@@ -20,7 +20,7 @@ jobs:
         with:
           CLOUD_MAKER_TOKEN: ${{secrets.CLOUD_MAKER_TOKEN}}
           CLOUD_MAKER_PIPELINE_ID: ${{secrets.CLOUD_MAKER_PIPELINE_I}}
-          CLOUD_MAKER_STAGE_ID: ${{secrets.CLOUD_MAKER_STAGE_ID}}
+          CLOUD_MAKER_STAGE_ID: ${{secrets.CLOUD_MAKER_STAGE_I}}
 
   clean-up:
     needs: test-deploy
