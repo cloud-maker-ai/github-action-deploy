@@ -1,3 +1,4 @@
+import { validate } from "uuid";
 import { getInput, setFailed } from "@actions/core";
 import axios from "axios";
 
@@ -16,6 +17,12 @@ async function run() {
   }
   if (!cmStageId) {
     console.warn("Input 'CLOUD_MAKER_STAGE_ID' has not been set");
+  }
+  if (cmPipelineId && !validate(cmPipelineId)) {
+    console.warn("Input 'CLOUD_MAKER_PIPELINE_ID' is not a valid UUID");
+  }
+  if (cmStageId && !validate(cmStageId)) {
+    console.warn("Input 'CLOUD_MAKER_STAGE_ID' is not a valid UUID");
   }
   if (!cmApiToken || !cmPipelineId || !cmStageId) {
     throw new Error("Missing inputs");
