@@ -14,9 +14,6 @@ jobs:
           ref: ${{ github.event.release.tag_name }}
       - run: npm ci && npm run build
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
-
       - uses: JasonEtco/build-and-tag-action@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
