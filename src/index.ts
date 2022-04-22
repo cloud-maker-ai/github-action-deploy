@@ -9,23 +9,29 @@ async function run() {
   const cmPipelineId = getInput("CLOUD_MAKER_PIPELINE_ID");
   const cmStageId = getInput("CLOUD_MAKER_STAGE_ID");
 
+  let inputsAreValid = true;
   if (!cmApiToken) {
     console.warn("Input 'CLOUD_MAKER_TOKEN' has not been set");
+    inputsAreValid = false;
   }
   if (!cmPipelineId) {
     console.warn("Input 'CLOUD_MAKER_PIPELINE_ID' has not been set");
+    inputsAreValid = false;
   }
   if (!cmStageId) {
     console.warn("Input 'CLOUD_MAKER_STAGE_ID' has not been set");
+    inputsAreValid = false;
   }
   if (cmPipelineId && !validate(cmPipelineId)) {
     console.warn("Input 'CLOUD_MAKER_PIPELINE_ID' is not a valid UUID");
+    inputsAreValid = false;
   }
   if (cmStageId && !validate(cmStageId)) {
     console.warn("Input 'CLOUD_MAKER_STAGE_ID' is not a valid UUID");
+    inputsAreValid = false;
   }
-  if (!cmApiToken || !cmPipelineId || !cmStageId) {
-    throw new Error("Missing inputs");
+  if (!inputsAreValid) {
+    throw new Error("Missing or invalid inputs");
   }
 
   const cmBaseAddress = "https://api.cloudmaker.ai/v1";
