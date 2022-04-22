@@ -52,9 +52,13 @@ async function run() {
   }
 }
 
-try {
-  run();
-} catch (error: any) {
-  console.log(`ERROR: ${error.message}`);
-  setFailed(error.message);
-}
+run().catch((error) => {
+  if (axios.isAxiosError(error)) {
+    const message = error.response?.data?.message || error.message;
+    const status = error.response?.status || "failed";
+    console.log(`Deployment failed. (${status}) ${message}`);
+  } else {
+    console.log(`ERROR: ${error.message}`);
+  }
+  setFailed("Deployment failed");
+});
