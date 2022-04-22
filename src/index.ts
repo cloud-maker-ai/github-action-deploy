@@ -2,7 +2,7 @@ import { getInput, setFailed } from "@actions/core";
 import axios from "axios";
 
 async function run() {
-  console.log("Retrieving variables");
+  console.log("Retrieving inputs");
 
   const cmApiToken = getInput("CLOUD_MAKER_TOKEN");
   const cmPipelineId = getInput("CLOUD_MAKER_PIPELINE_ID");
@@ -75,6 +75,6 @@ run().catch((error) => {
 
     setFailed(`Deployment failed. (${status}) ${message}`);
   } else {
-    setFailed(`ERROR: ${error.message}`);
+    setFailed(`${error.message}`);
   }
 });
