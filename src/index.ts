@@ -81,13 +81,15 @@ async function run() {
 run().catch((error) => {
   if (axios.isAxiosError(error)) {
     const status = error.response?.status || "failed";
-    const message =
+    const message: string =
       status === 404
         ? "Cloud Maker Pipeline or Stage not found."
         : error.response?.data?.message || error.message;
 
     setFailed(
-      `Deployment failed. (${status}) ${message}. Please ensure that all inputs are set correctly.`
+      `Deployment failed. (${status}) ${message}${
+        message.endsWith(".") ? "" : "."
+      } Please ensure that all inputs are set correctly.`
     );
   } else {
     setFailed(`${error.message}`);
